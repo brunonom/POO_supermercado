@@ -1,16 +1,23 @@
 public class AtendenteCaixa extends Funcionario{
 	private int numeroCaixa;
 
-	public AtendenteCaixa(String nome, double salario, int numeroCaixa){
-		super(nome, salario);
+	public AtendenteCaixa(String nome, String rg, String cpf, int idade double salario, int numeroCaixa){
+		super(nome, rg, cpf, salario);
 		this.numeroCaixa = numeroCaixa;
 	}
 
-	public String display(){
+	public String getInfo(){
 		String dados = "";
 		dados = dados + "Nome: " + super.getNome() + "\n";
-		dados = dados + "Salario: " + super.getSalario() + "\n";
-		dados = dados + "numeroCaixa: " + numeroCaixa + "\n";
+		dados = dados + "RG: " + super.getRG() + "\n";
+		dados = dados + "CPF: " + super.getCPF() + "\n";
+		dados = dados + "Idade: " + super.getIdade() + "\n";
+		dados = dados + "Salário: " + calculaSalario() + "\n";
+		dados = dados + "Número do caixa: " + numeroCaixa + "\n";
 		return dados;
+	}
+
+	public double calculaSalario(){
+		return super.getSalario();
 	}
 }
