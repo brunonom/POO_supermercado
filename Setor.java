@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Setor{
 	private String nome;
 	private int codigo;

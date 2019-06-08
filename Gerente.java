@@ -2,23 +2,21 @@ public class Gerente extends Funcionario{
 	private Setor setor;
 	private double bonus; //%
 
-	public Gerente(String nome, double salario, Setor setor){
-		super(nome, salario);
+	public Gerente(String nome, String rg, String cpf, int idade, double salario, Setor setor){
+		super(nome, rg, cpf, idade, salario);
 		this.setor = setor;
 	}
 
 	public String getInfo(){
 		String dados = "";
-		dados = dados + "Nome: " + super.getNome() + "\n";
-		dados = dados + "RG: " + super.getRG() + "\n";
-		dados = dados + "CPF: " + super.getCPF() + "\n";
-		dados = dados + "Idade: " + super.getIdade() + "\n";
-		dados = dados + "Salário: " + calculaSalario() + "\n";
+		super.getInfo();
 		dados = dados + "Setor: " + setor.getNome() + "\n";
+		dados = dados + "Bônus(%): " + bonus*100 + "\n";
 		return dados;
 	}
 
-	public void calculaSalario(){
+	@Override
+	public double calculaSalario(){
 		return super.getSalario() + super.getSalario()*bonus;
 	}
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Cliente extends Pessoa{
 	private boolean possuiCadastro;
 	private String email;
@@ -7,12 +9,14 @@ public class Cliente extends Pessoa{
 		super(nome, rg, cpf, idade);
 		this.email = email;
 		this.possuiCadastro = true;
+		compras = new ArrayList<Item>();
 	}
 
 	public Cliente(){
-		super("", "", "", "", -1);
+		super("", "", "", -1);
 		this.email = "";
 		this.possuiCadastro = false;
+		compras = new ArrayList<Item>();
 	}
 
 	public void addItem(Item item){
@@ -26,7 +30,7 @@ public class Cliente extends Pessoa{
 			total += compras.get(i).getPreco();
 		}
 		if(possuiCadastro){
-			total -= total*0.10
+			total -= total*0.10;
 		}
 		return total;
 	}
@@ -35,6 +39,12 @@ public class Cliente extends Pessoa{
 		for(int i=0; i<compras.size(); i++){
 			compras.get(i).realizaCompra();
 		}
+		compras.clear();
+		/*
+		if(!possuiCadastro){
+			deletar essa instancia de cliente
+		}
+		*/
 	}
 
 	public String getInfo(){
@@ -45,18 +55,17 @@ public class Cliente extends Pessoa{
 			dados = dados + "CPF: " + super.getCPF() + "\n";
 			dados = dados + "Idade: " + super.getIdade() + "\n";
 			dados = dados + "E-mail: " + email + "\n";
-			dados = dados + "Compras:\tProduto\t\tQuantidade\n";
-			for(int i=0; i<compras.size(); i++){
-				dados = dados + "\t\t" + compras.get(i).getProduto().getNome();
-				dados = dados + "\t\t" + compras.get(i).getQuantidade() + "\n";
-			}
+			
 		}
-		else{
-			dados = dados + "Compras:\tProduto\t\tQuantidade\n";
-			for(int i=0; i<compras.size(); i++){
-				dados = dados + "\t\t" + compras.get(i).getProduto().getNome();
-				dados = dados + "\t\t" + compras.get(i).getQuantidade() + "\n";
-			}
+		return dados;
+	}
+
+	public String getNotaFiscal(){
+		String dados = "";
+		dados = dados + "Compras:\tProduto\t\tQuantidade\n";
+		for(int i=0; i<compras.size(); i++){
+			dados = dados + "\t\t" + compras.get(i).getProduto().getNome();
+			dados = dados + "\t\t" + compras.get(i).getQuantidade() + "\n";
 		}
 		return dados;
 	}

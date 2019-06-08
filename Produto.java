@@ -26,7 +26,7 @@ public class Produto{
 		estoque+=unidades;
 	}
 
-	public void getInfo(){
+	public String getInfo(){
 		String dados = "";
 		dados = dados + "Nome: " + nome + "\n";
 		dados = dados + "Preco: " + preco + "\n";
