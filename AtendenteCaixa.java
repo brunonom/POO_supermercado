@@ -1,15 +1,15 @@
 public class AtendenteCaixa extends Funcionario{
-	private int numeroCaixa;
+	private Caixa caixa;
 
-	public AtendenteCaixa(String nome, String rg, String cpf, int idade, double salario, int numeroCaixa){
+	public AtendenteCaixa(String nome, String rg, String cpf, int idade, double salario, Caixa caixa){
 		super(nome, rg, cpf, idade, salario);
-		this.numeroCaixa = numeroCaixa;
+		this.caixa = caixa;
 	}
 
 	public String getInfo(){
 		String dados = "";
 		dados = super.getInfo();
-		dados = dados + "Número do caixa: " + numeroCaixa + "\n";
+		dados = dados + "Número do caixa: " + caixa + "\n";
 		return dados;
 	}
 }

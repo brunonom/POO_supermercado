@@ -1,8 +1,10 @@
 javac Setor.java
+javac Item.java
 javac Pessoa.java
 javac Cliente.java
+javac Caixa.java
 javac Funcionario.java
 javac AtendenteCaixa.java
 javac Gerente.java
 javac Produto.java
-javac Item.java
+javac Supermercado.java
