@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Supermercado{
 	private ArrayList<Setor> setores;
 	private ArrayList<Pessoa> pessoas;
+	private ArrayList<Caixa> caixas;
 	private boolean executando;
 	private Scanner scan;
 
