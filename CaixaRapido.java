@@ -1,39 +1,33 @@
 import java.util.ArrayList;
 
 public class CaixaRapido extends Caixa{
+	private int qtdCaixas;
 	private Caixa[] caixasRapidos;
 	private boolean[] caixasLivres;
-	private ArrayList<Cliente> fila;
 
-	public CaixaRapido(int qtdCaixasRapidos){
+	public CaixaRapido(int qtdCaixas){
 		super();
-		caixasRapidos = Caixa[qtdCaixasRapidos];
-		caixasLivres = new boolean[qtdCaixasRapidos];
-		for(int i=0; i<caixasLivres.size(); i++){
-			caixasLivres.get(i) = new Boolean(true);
+		this.qtdCaixas = qtdCaixas;
+		caixasRapidos = new Caixa[qtdCaixas];
+		caixasLivres = new boolean[qtdCaixas];
+		for(int i=0; i<qtdCaixas; i++){
+			caixasLivres[i] = true;
 		}
-		fila = new ArrayList<Cliente>();
-	}
-
-	public void addCliente(Cliente cliente){
-		fila.add(cliente);
 	}
 
 	@Override
-	public void recebeCliente(){
-		for(int i=0; i<caixasLivres.size(); i++){
+	public void recebeCliente(Cliente cliente){
+		for(int i=0; i<qtdCaixas; i++){
 			if(caixasLivres[i]){
-				caixasRapidos[i].recebeCliente(fila.get(0));
+				caixasRapidos[i].recebeCliente(cliente);
 				caixasLivres[i] = false;
-				fila.remove(0);
 				break;
 			}
 		}
 	}
 
-	@Override
 	public void atendeCliente(int numeroCaixa){
-		caixasRapidos[numeroCaixa].atendeCliente(cliente);
+		caixasRapidos[numeroCaixa].atendeCliente();
 		caixasLivres[numeroCaixa] = true;
 	}
 }

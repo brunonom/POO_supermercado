@@ -30,7 +30,7 @@ public class Cliente extends Pessoa{
 			total += compras.get(i).getPreco();
 		}
 		if(possuiCadastro){
-			total -= total*0.10;
+			total -= total*10/100;
 		}
 		return total;
 	}
@@ -40,11 +40,6 @@ public class Cliente extends Pessoa{
 			compras.get(i).realizaCompra();
 		}
 		compras.clear();
-		/*
-		if(!possuiCadastro){
-			deletar essa instancia de cliente
-		}
-		*/
 	}
 
 	public String getInfo(){
@@ -54,8 +49,7 @@ public class Cliente extends Pessoa{
 			dados = dados + "RG: " + super.getRG() + "\n";
 			dados = dados + "CPF: " + super.getCPF() + "\n";
 			dados = dados + "Idade: " + super.getIdade() + "\n";
-			dados = dados + "E-mail: " + email + "\n";
-			
+			dados = dados + "E-mail: " + email + "\n";		
 		}
 		return dados;
 	}
@@ -69,4 +63,59 @@ public class Cliente extends Pessoa{
 		}
 		return dados;
 	}
+
+	/*
+	public static Object criaInstancia(){
+		Object instancia = null;
+		
+		int escolha = -1;
+		while(escolha<0 || escolha>1){
+			System.out.printf("[0] realizar cadastro\n");
+			System.out.printf("[1] nao realizar cadastro\n");
+			escolha = leitor.nextInt();
+			leitor.nextLine();
+			System.out.printf("\n");
+		}
+
+		if(escolha == 0){
+			String nome = "";
+			while(nome.equals("")){
+				System.out.printf("nome: ");
+				nome = leitor.nextLine();
+			}
+
+			String rg = "";
+			while(rg.equals("")){
+				System.out.printf("rg: ");
+				rg = leitor.nextLine();
+			}
+
+			String cpf = "";
+			while(cpf.equals("")){
+				System.out.printf("cpf: ");
+				cpf = leitor.nextLine();
+			}
+
+			int idade = -1;
+			while(idade < 0){
+				System.out.printf("idade: ");
+				idade = leitor.nextInt();
+				leitor.nextLine();
+			}
+
+			String email = "";
+			while(email.equals("")){
+				System.out.printf("email: ");
+				email = leitor.nextLine();
+			}
+
+			instancia = new Cliente(nome, rg, cpf, idade, email);
+		}
+		else{
+			instancia = new Cliente();
+		}
+
+		return instancia;
+	}
+	*/
 }

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Caixa {
+public class Caixa{
 	private static int geradorNumero = 0;
 	private int numero;
 	private Cliente clienteAtual;
@@ -12,12 +12,15 @@ public class Caixa {
 	public void setNumero(){
 		this.numero = ++geradorNumero;
 	}
+	public int getNumero(){
+		return numero;
+	}
 
 	public void recebeCliente(Cliente cliente){
 		clienteAtual = cliente;
 	}
 
-	public void atenteCliente(){
-		cliente.realizaCompra();
+	public void atendeCliente(){
+		clienteAtual.realizaCompra();
 	}
 }

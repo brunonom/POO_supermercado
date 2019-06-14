@@ -1,4 +1,4 @@
-public abstract class Pessoa implements CRUD{
+public abstract class Pessoa{
 	private String nome;
 	private String rg;
 	private String cpf;
@@ -23,33 +23,6 @@ public abstract class Pessoa implements CRUD{
 	public int getIdade(){
 		return idade;
 	}
-
-	public Object criaInstancia(){
-		this.nome = ""
-		while(this.nome.equals("")){
-			System.out.printf("nome: ");
-			this.nome = leitor.nextLine();
-		}
-
-		this.rg = ""
-		while(this.rg.equals("")){
-			System.out.printf("rg: ");
-			this.rg = leitor.nextLine();
-		}
-
-		this.cpf = ""
-		while(this.cpf.equals("")){
-			System.out.printf("cpf: ");
-			this.cpf = leitor.nextLine();
-		}
-
-		this.idade = ""
-		while(this.idade < 0){
-			System.out.printf("idade: ");
-			this.idade = leitor.nextInt();
-			leitor.nextLine();
-		}
-	} 
 
 	public abstract String getInfo();
 }

@@ -1,59 +1,39 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Supermercado{
 	private ArrayList<Setor> setores;
 	private ArrayList<Pessoa> pessoas;
 	private ArrayList<Caixa> caixas;
 	private boolean executando;
-	private Scanner scan;
+	private int menu; //0=principal; 1=setores, 2=pessoas, 3=caixas
 
 	public Supermercado(){
 		this.setores = new ArrayList<Setor>();
 		this.pessoas = new ArrayList<Pessoa>();
+		this.caixas = new ArrayList<Caixa>();
 		this.executando = true;
-		this.scan = new Scanner(System.in);
+		this.menu = 0;
 	}
 
+	public ArrayList<Setor> getSetores(){
+		return setores;
+	}
+	public ArrayList<Pessoa> getPessoas(){
+		return pessoas;
+	}
+	public ArrayList<Caixa> getCaixas(){
+		return caixas;
+	}
 	public boolean getExecutando(){
 		return executando;
 	}
 	public void setExecutando(boolean executando){
 		this.executando = executando;
 	}
-
-	public static void main(String[] args){
-		Supermercado mercado = new Supermercado();
-		int opcao;
-		while(mercado.getExecutando()){
-			opcao = mercado.escolheOpcao();
-			mercado.executaOpcao(opcao);
-		}
+	public int getMenu(){
+		return menu;
 	}
-
-	public int escolheOpcao(){
-		int escolha = -1;
-		while(escolha<0 || escolha>2){
-			System.out.printf("[0] Sair\n" );
-			System.out.printf("[1] opcao\n" );
-			System.out.printf("[2] opcao\n" );
-			escolha = scan.nextInt();
-			scan.nextLine();
-			System.out.printf("\n");
-		}
-		return escolha;
-	}
-
-	public void executaOpcao(int escolha){
-		switch(escolha){
-			case 0:
-				setExecutando(false);
-				System.out.printf("\n\n\nAdeus\n\n\n");
-				break;
-			case 1:
-				break;
-			case 2:
-				break;
-		}
+	public void setMenu(int menu){
+		this.menu=menu;
 	}
 }

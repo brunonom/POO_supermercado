@@ -1,16 +1,13 @@
 public class Gerente extends Funcionario{
-	private Setor setor;
-	private double bonus; //%
+	private static double bonus = 10; //%
 
-	public Gerente(String nome, String rg, String cpf, int idade, double salario, Setor setor){
+	public Gerente(String nome, String rg, String cpf, int idade, double salario){
 		super(nome, rg, cpf, idade, salario);
-		this.setor = setor;
 	}
 
 	public String getInfo(){
 		String dados = "";
 		super.getInfo();
-		dados = dados + "Setor: " + setor.getNome() + "\n";
 		dados = dados + "Bônus(%): " + bonus*100 + "\n";
 		return dados;
 	}

@@ -23,4 +23,46 @@ public class Funcionario extends Pessoa{
 	public double calculaSalario(){
 		return salario;
 	}
+
+	/*
+	public static Object criaInstancia(){
+		Object instancia = null;
+
+		String nome = "";
+		while(nome.equals("")){
+			System.out.printf("nome: ");
+			nome = leitor.nextLine();
+		}
+
+		String rg = "";
+		while(rg.equals("")){
+			System.out.printf("rg: ");
+			rg = leitor.nextLine();
+		}
+
+		String cpf = "";
+		while(cpf.equals("")){
+			System.out.printf("cpf: ");
+			cpf = leitor.nextLine();
+		}
+
+		int idade = -1;
+		while(idade < 0){
+			System.out.printf("idade: ");
+			idade = leitor.nextInt();
+			leitor.nextLine();
+		}
+
+		double salario = -1;
+		while(salario < 0){
+			System.out.printf("salario: ");
+			salario = leitor.nextDouble();
+			leitor.nextLine();
+		}
+
+		instancia = new Funcionario(nome, rg, cpf, idade, salario);
+
+		return instancia;
+	}
+	*/
 }
