@@ -5,7 +5,7 @@ public class Supermercado{
 	private ArrayList<Pessoa> pessoas;
 	private ArrayList<Caixa> caixas;
 	private boolean executando;
-	private int menu; //0=principal; 1=setores, 2=pessoas, 3=caixas
+	private int menu; //0=principal; 1=setores, 2=pessoas, 3=caixas, 4=caixa especifico
 
 	public Supermercado(){
 		this.setores = new ArrayList<Setor>();
@@ -53,6 +53,13 @@ public class Supermercado{
 			if(pessoas.get(i) instanceof Cliente){
 				contador++;
 			}
+		}
+		return contador;
+	}
+	public int contaProdutos(){
+		int contador = 0;
+		for(int i=0; i<setores.size(); i++){
+			contador += setores.get(i).getProdutos().size();
 		}
 		return contador;
 	}

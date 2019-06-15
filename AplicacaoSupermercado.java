@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 public class AplicacaoSupermercado{
 	private static Supermercado mercado = new Supermercado();
-	private static Scanner scan =  new Scanner(System.in);
+	private static Scanner scan = new Scanner(System.in);
+	private static Caixa caixaAcessado;
 
 	public static void main(String[] args){
 		int opcao = -1;
@@ -19,6 +20,9 @@ public class AplicacaoSupermercado{
 					break;
 				case 3:
 					opcao = escolhaMenuCaixas();
+					break;
+				case 4:
+					opcao = escolhaMenuCaixaEspecifico();
 					break;
 			}
 			System.out.printf("\n");
@@ -69,11 +73,26 @@ public class AplicacaoSupermercado{
 		}
 		public static int escolhaMenuCaixas(){
 			int escolha = -1;
-			while(escolha<0 || escolha>3){
+			while(escolha<0 || escolha>mercado.getCaixas().size()+1){
 				System.out.printf("[0] voltar\n");
 				System.out.printf("[1] adicionar caixa\n");
-				System.out.printf("[2] adicionar cliente ao caixa\n");
-				System.out.printf("[3] atender cliente no caixa\n");
+				for(int i=0; i<mercado.getCaixas().size(); i++){
+					System.out.printf("[%d] acessar caixa %d\n", i+2, mercado.getCaixas().get(i).getNumero());
+				}
+				System.out.printf("escolha: ");
+				escolha = scan.nextInt();
+				scan.nextLine();
+			}
+			return escolha;
+		}
+		public static int escolhaMenuCaixaEspecifico(){
+			int escolha = -1;
+			while(escolha<0 || escolha>2){
+				System.out.printf("[0] voltar\n");
+				System.out.printf("[1] atender cliente\n");
+				System.out.printf("[2] adicionar item\n");
+				System.out.printf("[3] ver dados da compra\n");
+				System.out.printf("[4] realizar compra\n");
 				System.out.printf("escolha: ");
 				escolha = scan.nextInt();
 				scan.nextLine();
@@ -137,11 +156,28 @@ public class AplicacaoSupermercado{
 					case 1:
 						adicionarCaixa();
 						return;
+					default:
+						caixaAcessado = mercado.getCaixas().get(escolha-2);
+						mercado.setMenu(4);
+						return;
+				}
+			case 4: //menu caixa especifico
+				switch(escolha){
+					case 0:
+						mercado.setMenu(3);
+						caixaAcessado = null;
+						return;
+					case 1:
+						atenderCliente();
+						return;
 					case 2:
-						adicionarClienteCaixa();
+						adicionarItem();
 						return;
 					case 3:
-						atenderClienteCaixa();
+						getDadosCompra();
+						return;
+					case 4:
+						realizarCompra();
 						return;
 				}
 		}
@@ -403,107 +439,122 @@ public class AplicacaoSupermercado{
 
 			System.out.printf("caixa adicionado\n");
 		}
-		public static void adicionarClienteCaixa(){
-			if(mercado.getCaixas().size() == 0){
-				System.out.printf("nao existem caixas dsponiveis\n");
+
+	//menu caixa especifico
+		public static void atenderCliente(){
+			if(!caixaAcessado.getPossuiAtendente()){
+				System.out.printf("este caixa nao possui atendente\n");
 			}
 			else{
-				System.out.printf("tipo: ");
-				int escolha = -1;
-				while(escolha<0 || escolha>1){
-					System.out.printf("[0] cliente comum\n");
-					System.out.printf("[1] cliente cadastrado\n");
-					System.out.printf("escolha: ");
-					escolha = scan.nextInt();
-					scan.nextLine();
-				}
-
-				Cliente clienteAdicionado = null;
-				if(escolha == 0){
-					clienteAdicionado = new Cliente();
+				if(caixaAcessado.getPossuiCliente()){
+					System.out.printf("este caixa ja esta ocupado\n");
 				}
 				else{
-					if(mercado.contaClientes() == 0){
-						System.out.printf("nao existem clientes cadastrados\n");
+					System.out.printf("tipo: ");
+					int escolha = -1;
+					while(escolha<0 || escolha>1){
+						System.out.printf("[0] cliente comum\n");
+						System.out.printf("[1] cliente cadastrado\n");
+						System.out.printf("escolha: ");
+						escolha = scan.nextInt();
+						scan.nextLine();
+					}
+
+					Cliente clienteAdicionado = null;
+					if(escolha == 0){
+						clienteAdicionado = new Cliente();
 					}
 					else{
-						System.out.printf("cliente:\n");
-						escolha = -1;
-						while(clienteAdicionado == null){
-							for(int i=0; i<mercado.getPessoas().size(); i++){
-								if(mercado.getPessoas().get(i) instanceof Cliente){
-									System.out.printf("[%d] nome: %s\n", i, mercado.getPessoas().get(i).getNome());
+						if(mercado.contaClientes() == 0){
+							System.out.printf("nao existem clientes cadastrados\n");
+						}
+						else{
+							System.out.printf("cliente:\n");
+							escolha = -1;
+							while(clienteAdicionado == null){
+								for(int i=0; i<mercado.getPessoas().size(); i++){
+									if(mercado.getPessoas().get(i) instanceof Cliente){
+										System.out.printf("[%d] nome: %s\n", i, mercado.getPessoas().get(i).getNome());
+									}
 								}
-							}
-							System.out.printf("escolha: ");
-							escolha = scan.nextInt();
-							scan.nextLine();
-							if(mercado.getPessoas().get(escolha) instanceof Cliente){
-								clienteAdicionado = (Cliente)mercado.getPessoas().get(escolha);
+								System.out.printf("escolha: ");
+								escolha = scan.nextInt();
+								scan.nextLine();
+								if(mercado.getPessoas().get(escolha) instanceof Cliente){
+									clienteAdicionado = (Cliente)mercado.getPessoas().get(escolha);
+								}
 							}
 						}
 					}
-				}
 
-				if(clienteAdicionado == null){
-					System.out.printf("nao foi possivel adicionar o cliente\n");
+					if(clienteAdicionado == null){
+						System.out.printf("nao foi possivel adicionar o cliente\n");
+					}
+					else{
+						caixaAcessado.atendeCliente(clienteAdicionado);
+						System.out.printf("cliente adicionado\n");
+					}
+				}
+			}
+		}
+		public static void adicionarItem(){
+			if(!caixaAcessado.getPossuiCliente()){
+				System.out.printf("este caixa nao possui cliente\n");	
+			}
+			else{
+				if(mercado.contaProdutos() == 0){
+					System.out.printf("nao existem produtos disponiveis\n");	
 				}
 				else{
-					System.out.printf("caixa:\n");
-					escolha = -1;
-					while(escolha<0 || escolha>mercado.getCaixas().size()-1){
-						for(int i=0; i<mercado.getCaixas().size(); i++){
-							System.out.printf("[%d] caixa: %d\n", i, mercado.getCaixas().get(i).getNumero());
+					int escolha = -1;
+					while(escolha<0 || escolha>mercado.getSetores().size()-1){
+						System.out.printf("setor:\n");
+						for(int i=0; i<mercado.getSetores().size(); i++){
+							Setor setorAtual = mercado.getSetores().get(i);
+							System.out.printf("[%d] nome: %s\n", setorAtual.getNome());
 						}
 						System.out.printf("escolha: ");
 						escolha = scan.nextInt();
 						scan.nextLine();
 					}
-					Caixa caixa = mercado.getCaixas().get(escolha);
+					Setor setorDoProduto = mercado.getSetores().get(escolha);
 
-					// if(caixa instanceof CaixaRapido){
-					// 	System.out.printf("caixa rapido:\n");
-					// 	int escolha = -1;
-					// 	while(escolha<0 || escolha>caixa.getQtdCaixas()-1){
-					// 		for(int i=0; i<caixa.getQtdCaixas(); i++){
-					// 			System.out.printf("[%d] caixa rapido: %d\n", i, i+1);
-					// 		}
-					// 		escolha = scan.nextInt();
-					// 		scan.nextLine();
-					// 	}
-					// 	/*foi aqui que percebi que nao quero lidar com caixa rapido
-					// 	ta confuso e chato, e provavelmente errado, tira?*/
-					// }
-					// else{
+					escolha = -1;
+					while(escolha<0 || escolha>setorDoProduto.getProdutos().size()-1){
+						System.out.printf("produto:\n");
+						for(int i=0; i<setorDoProduto.getProdutos().size(); i++){
+							Produto produtoAtual = setorDoProduto.getProdutos().get(i);
+							System.out.printf("[%d] nome: %s", produtoAtual.getNome());
+						}
+						System.out.printf("escolha: ");
+						escolha = scan.nextInt();
+						scan.nextLine();
+					}
+					Produto produtoItem = setorDoProduto.getProdutos().get(escolha);
 
-					// }
+					int quantidadeItem = -1;
+					while(quantidadeItem<0 || quantidadeItem>produtoItem.getEstoque()){
+						System.out.printf("quantidade (max %d): ", produtoItem.getEstoque());
+						quantidadeItem = scan.nextInt();
+						scan.nextLine();
+					}
 
-					caixa.recebeCliente(clienteAdicionado);
+					Item novoItem = new Item(produtoItem, quantidadeItem);
+					caixaAcessado.adicionaItem(novoItem);
 
-					System.out.printf("cliente adicionado");
+					System.out.printf("item adicionado\n");
 				}
 			}
 		}
-		public static void atenderClienteCaixa(){
-			if(mercado.getCaixas().size() == 0){
-				System.out.printf("nao existem caixas disponiveis\n");
+		public static void getDadosCompra(){
+			if(!caixaAcessado.getPossuiCliente()){
+				System.out.printf("este caixa nao possui cliente\n");	
 			}
 			else{
-				System.out.printf("caixa:\n");
-				int escolha = -1;
-				while(escolha<0 || escolha>mercado.getCaixas().size()-1){
-					for(int i=0; i<mercado.getCaixas().size(); i++){
-						System.out.printf("[%d] caixa: %d\n", i, mercado.getCaixas().get(i).getNumero());
-					}
-					System.out.printf("escolha: ");
-					escolha = scan.nextInt();
-					scan.nextLine();
-				}
-				Caixa caixa = mercado.getCaixas().get(escolha);
-
-				caixa.atendeCliente();
-
-				System.out.printf("cliente atendido\n");
+				caixaAcessado.getDadosCompra();
 			}
+		}
+		public static void realizarCompra(){
+
 		}
 }

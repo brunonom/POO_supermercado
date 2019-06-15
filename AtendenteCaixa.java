@@ -4,6 +4,7 @@ public class AtendenteCaixa extends Funcionario{
 	public AtendenteCaixa(String nome, String rg, String cpf, int idade, double salario, Caixa caixa){
 		super(nome, rg, cpf, idade, salario);
 		this.caixa = caixa;
+		caixa.setPossuiAtendente();
 	}
 
 	public String getInfo(){

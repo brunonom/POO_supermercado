@@ -19,7 +19,7 @@ public class Cliente extends Pessoa{
 		compras = new ArrayList<Item>();
 	}
 
-	public void addItem(Item item){
+	public void adicionaItem(Item item){
 		compras.add(item);
 	}
 
@@ -54,13 +54,24 @@ public class Cliente extends Pessoa{
 		return dados;
 	}
 
-	public String getNotaFiscal(){
+	public String getDadosCompra(){
+		double somatorio = 0;
 		String dados = "";
-		dados = dados + "Compras:\tProduto\t\tQuantidade\n";
+		dados = dados + "compras:\tproduto\t\tquantidade\t\tpreco\n";
 		for(int i=0; i<compras.size(); i++){
 			dados = dados + "\t\t" + compras.get(i).getProduto().getNome();
-			dados = dados + "\t\t" + compras.get(i).getQuantidade() + "\n";
+			dados = dados + "\t\t" + compras.get(i).getQuantidade();
+			dados = dados + "\t\t" + compras.get(i).getPreco() + "\n";
+			somatorio += compras.get(i).getPreco();
 		}
+		dados = dados + "total: " + somatorio + "\n";
+		if(possuiCadastro){
+			dados = dados + "desconto: 10%\n";
+		}
+		else{
+			dados = dados + "desconto: 0%\n";
+		}
+		dados = dados + "preco final: " + calculaTotal() + "\n";
 		return dados;
 	}
 

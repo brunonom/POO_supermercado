@@ -12,6 +12,9 @@ public class Setor{
 	public String getNome(){
 		return nome;
 	}
+	public ArrayList<Produto> getProdutos(){
+		return produtos;
+	}
 
 	public void adicionarProduto(Produto produto){
 		produtos.add(produto);
