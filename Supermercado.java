@@ -36,4 +36,24 @@ public class Supermercado{
 	public void setMenu(int menu){
 		this.menu=menu;
 	}
+
+	public void adicionarSetor(Setor setor){
+		setores.add(setor);
+	}
+	public void adicionarPessoa(Pessoa pessoa){
+		pessoas.add(pessoa);
+	}
+	public void adicionarCaixa(Caixa caixa){
+		caixas.add(caixa);
+	}
+
+	public int contaClientes(){
+		int contador = 0;
+		for(int i=0; i<pessoas.size(); i++){
+			if(pessoas.get(i) instanceof Cliente){
+				contador++;
+			}
+		}
+		return contador;
+	}
 }

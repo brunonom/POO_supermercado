@@ -13,7 +13,7 @@ public class Setor{
 		return nome;
 	}
 
-	public void addProduto(Produto produto){
+	public void adicionarProduto(Produto produto){
 		produtos.add(produto);
 	}
 

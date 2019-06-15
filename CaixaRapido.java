@@ -1,33 +1,30 @@
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
-public class CaixaRapido extends Caixa{
-	private int qtdCaixas;
-	private Caixa[] caixasRapidos;
-	private boolean[] caixasLivres;
+// public class CaixaRapido extends Caixa{
+// 	private ArrayList<Caixa> caixasRapidos;
 
-	public CaixaRapido(int qtdCaixas){
-		super();
-		this.qtdCaixas = qtdCaixas;
-		caixasRapidos = new Caixa[qtdCaixas];
-		caixasLivres = new boolean[qtdCaixas];
-		for(int i=0; i<qtdCaixas; i++){
-			caixasLivres[i] = true;
-		}
-	}
+// 	public CaixaRapido(int qtdCaixas){
+// 		super();
+// 		caixasRapidos = new ArrayList<Caixa>();
+// 	}
 
-	@Override
-	public void recebeCliente(Cliente cliente){
-		for(int i=0; i<qtdCaixas; i++){
-			if(caixasLivres[i]){
-				caixasRapidos[i].recebeCliente(cliente);
-				caixasLivres[i] = false;
-				break;
-			}
-		}
-	}
+// 	public int getQtdCaixas(){
+// 		return qtdCaixas;
+// 	}
 
-	public void atendeCliente(int numeroCaixa){
-		caixasRapidos[numeroCaixa].atendeCliente();
-		caixasLivres[numeroCaixa] = true;
-	}
-}
+// 	@Override
+// 	public void recebeCliente(Cliente cliente){
+// 		for(int i=0; i<qtdCaixas; i++){
+// 			if(caixasLivres[i]){
+// 				caixasRapidos[i].recebeCliente(cliente);
+// 				caixasLivres[i] = false;
+// 				break;
+// 			}
+// 		}
+// 	}
+
+// 	public void atendeCliente(int numeroCaixa){
+// 		caixasRapidos[numeroCaixa].atendeCliente();
+// 		caixasLivres[numeroCaixa] = true;
+// 	}
+// }
