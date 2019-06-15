@@ -77,7 +77,8 @@ public class AplicacaoSupermercado{
 				System.out.printf("[0] voltar\n");
 				System.out.printf("[1] adicionar caixa\n");
 				for(int i=0; i<mercado.getCaixas().size(); i++){
-					System.out.printf("[%d] acessar caixa %d\n", i+2, mercado.getCaixas().get(i).getNumero());
+					Caixa caixaX = mercado.getCaixas().get(i);
+					System.out.printf("[%d] acessar caixa %d\n", i+2, caixaX.getNumero());
 				}
 				System.out.printf("escolha: ");
 				escolha = scan.nextInt();
@@ -87,7 +88,7 @@ public class AplicacaoSupermercado{
 		}
 		public static int escolhaMenuCaixaEspecifico(){
 			int escolha = -1;
-			while(escolha<0 || escolha>2){
+			while(escolha<0 || escolha>4){
 				System.out.printf("[0] voltar\n");
 				System.out.printf("[1] atender cliente\n");
 				System.out.printf("[2] adicionar item\n");
@@ -168,16 +169,16 @@ public class AplicacaoSupermercado{
 						caixaAcessado = null;
 						return;
 					case 1:
-						atenderCliente();
+						atendeCliente();
 						return;
 					case 2:
-						adicionarItem();
+						adicionaItem();
 						return;
 					case 3:
 						getDadosCompra();
 						return;
 					case 4:
-						realizarCompra();
+						realizaCompra();
 						return;
 				}
 		}
@@ -226,7 +227,8 @@ public class AplicacaoSupermercado{
 				int escolha = -1;
 				while(escolha<0 || escolha>mercado.getSetores().size()-1){
 					for(int i=0; i<mercado.getSetores().size(); i++){
-						System.out.printf("[%d] setor: %s\n", i, mercado.getSetores().get(i).getNome());
+						Setor setorX = mercado.getSetores().get(i);
+						System.out.printf("[%d] nome: %s\n", i, setorX.getNome());
 					}
 					System.out.printf("escolha: ");
 					escolha = scan.nextInt();
@@ -318,7 +320,8 @@ public class AplicacaoSupermercado{
 				int escolha = -1;
 				while(escolha<0 || escolha>mercado.getCaixas().size()-1){
 					for(int i=0; i<mercado.getCaixas().size(); i++){
-						System.out.printf("[%d] caixa: %d\n", i, mercado.getCaixas().get(i).getNumero());
+						Caixa caixaX = mercado.getCaixas().get(i);
+						System.out.printf("[%d] caixa numero %d\n", i, caixaX.getNumero());
 					}
 					System.out.printf("escolha: ");
 					escolha = scan.nextInt();
@@ -441,7 +444,7 @@ public class AplicacaoSupermercado{
 		}
 
 	//menu caixa especifico
-		public static void atenderCliente(){
+		public static void atendeCliente(){
 			if(!caixaAcessado.getPossuiAtendente()){
 				System.out.printf("este caixa nao possui atendente\n");
 			}
@@ -450,7 +453,7 @@ public class AplicacaoSupermercado{
 					System.out.printf("este caixa ja esta ocupado\n");
 				}
 				else{
-					System.out.printf("tipo: ");
+					System.out.printf("tipo:\n");
 					int escolha = -1;
 					while(escolha<0 || escolha>1){
 						System.out.printf("[0] cliente comum\n");
@@ -474,7 +477,8 @@ public class AplicacaoSupermercado{
 							while(clienteAdicionado == null){
 								for(int i=0; i<mercado.getPessoas().size(); i++){
 									if(mercado.getPessoas().get(i) instanceof Cliente){
-										System.out.printf("[%d] nome: %s\n", i, mercado.getPessoas().get(i).getNome());
+										Cliente clienteX = (Cliente)mercado.getPessoas().get(i);
+										System.out.printf("[%d] nome: %s\n", i, clienteX.getNome());
 									}
 								}
 								System.out.printf("escolha: ");
@@ -497,7 +501,7 @@ public class AplicacaoSupermercado{
 				}
 			}
 		}
-		public static void adicionarItem(){
+		public static void adicionaItem(){
 			if(!caixaAcessado.getPossuiCliente()){
 				System.out.printf("este caixa nao possui cliente\n");	
 			}
@@ -510,8 +514,8 @@ public class AplicacaoSupermercado{
 					while(escolha<0 || escolha>mercado.getSetores().size()-1){
 						System.out.printf("setor:\n");
 						for(int i=0; i<mercado.getSetores().size(); i++){
-							Setor setorAtual = mercado.getSetores().get(i);
-							System.out.printf("[%d] nome: %s\n", setorAtual.getNome());
+							Setor setorX = mercado.getSetores().get(i);
+							System.out.printf("[%d] nome: %s\n", i, setorX.getNome());
 						}
 						System.out.printf("escolha: ");
 						escolha = scan.nextInt();
@@ -523,8 +527,8 @@ public class AplicacaoSupermercado{
 					while(escolha<0 || escolha>setorDoProduto.getProdutos().size()-1){
 						System.out.printf("produto:\n");
 						for(int i=0; i<setorDoProduto.getProdutos().size(); i++){
-							Produto produtoAtual = setorDoProduto.getProdutos().get(i);
-							System.out.printf("[%d] nome: %s", produtoAtual.getNome());
+							Produto produtoX = setorDoProduto.getProdutos().get(i);
+							System.out.printf("[%d] nome: %s\n", i, produtoX.getNome());
 						}
 						System.out.printf("escolha: ");
 						escolha = scan.nextInt();
@@ -551,10 +555,17 @@ public class AplicacaoSupermercado{
 				System.out.printf("este caixa nao possui cliente\n");	
 			}
 			else{
-				caixaAcessado.getDadosCompra();
+				System.out.printf("%s\n", caixaAcessado.getDadosCompra());
 			}
 		}
-		public static void realizarCompra(){
-
+		public static void realizaCompra(){
+			if(!caixaAcessado.getPossuiCliente()){
+				System.out.printf("este caixa nao possui cliente\n");	
+			}
+			else{
+				caixaAcessado.realizaCompra();
+				// System.out.printf("%s\n", caixaAcessado.getDadosCompra());
+				System.out.printf("compra realizada\n");
+			}
 		}
 }
