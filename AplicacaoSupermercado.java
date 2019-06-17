@@ -750,7 +750,7 @@ public class AplicacaoSupermercado{
 					}
 				}
 				atendenteCaixaX.getCaixa().setPossuiAtendente(false);
-				mercado.getPessoas().remove(pessoaAcessada);
+				mercado.getPessoas().remove(atendenteCaixaX);
 				menu = 2;
 				pessoaAcessada = null;
 				System.out.printf("pessoa removida\n");
@@ -771,7 +771,7 @@ public class AplicacaoSupermercado{
 						return;
 					}
 				}
-				mercado.getPessoas().remove(pessoaAcessada);
+				mercado.getPessoas().remove(clienteX);
 				menu = 2;
 				pessoaAcessada = null;
 				System.out.printf("pessoa removida\n");

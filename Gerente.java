@@ -5,6 +5,7 @@ public class Gerente extends Funcionario{
 		super(nome, rg, cpf, idade, salario);
 	}
 
+	@Override
 	public String getInfo(){
 		String dados = "";
 		super.getInfo();

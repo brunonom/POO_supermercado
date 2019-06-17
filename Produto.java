@@ -1,4 +1,4 @@
-public class Produto{
+public class Produto implements Informacoes{
 	private String nome;
 	private double preco;
 	private int estoque;

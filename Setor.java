@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Setor{
+public class Setor implements Informacoes{
 	private String nome;
 	private ArrayList<Produto> produtos;
 

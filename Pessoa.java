@@ -1,4 +1,4 @@
-public abstract class Pessoa{
+public abstract class Pessoa implements Informacoes{
 	private String nome;
 	private String rg;
 	private String cpf;
