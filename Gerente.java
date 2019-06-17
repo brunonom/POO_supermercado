@@ -8,12 +8,12 @@ public class Gerente extends Funcionario{
 	public String getInfo(){
 		String dados = "";
 		super.getInfo();
-		dados = dados + "Bônus(%): " + bonus*100 + "\n";
+		dados = dados + "bonus(%): " + bonus + "\n";
 		return dados;
 	}
 
 	@Override
 	public double calculaSalario(){
-		return super.getSalario() + super.getSalario()*bonus;
+		return super.getSalario() + super.getSalario()*bonus/100;
 	}
 }

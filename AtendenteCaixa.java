@@ -10,8 +10,19 @@ public class AtendenteCaixa extends Funcionario{
 	public String getInfo(){
 		String dados = "";
 		dados = super.getInfo();
-		dados = dados + "Número do caixa: " + caixa + "\n";
+		dados = dados + "numero do caixa: " + caixa.getNumero() + "\n";
 		return dados;
+	}
+
+	public void alteraInfo(String nome, String rg, String cpf, int idade, double salario, Caixa caixa){
+		super.alteraInfo(nome, rg, cpf, idade, salario);
+		this.caixa.setPossuiAtendente(false);
+		this.caixa = caixa;
+		this.caixa.setPossuiAtendente(true);
+	}
+
+	public Caixa getCaixa(){
+		return caixa;
 	}
 
 	/*

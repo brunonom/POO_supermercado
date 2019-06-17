@@ -16,16 +16,19 @@ public class Setor{
 		return produtos;
 	}
 
-	public void adicionarProduto(Produto produto){
+	public void adicionaProduto(Produto produto){
 		produtos.add(produto);
 	}
 
 	public String getInfo(){
 		String dados = "";
-		dados = dados + "Nome: " + nome + "\n";
-		dados = dados + "Produtos:\n";
+		dados = dados + "nome: " + nome + "\n";
+		dados = dados + "produtos:\n";
+		dados = dados + "\tnome\tpreco\testoque\n";
 		for(int i=0; i<produtos.size(); i++){
-			dados = dados + "\t" + produtos.get(i).getNome() + "\n"; 
+			dados = dados + "\t" + produtos.get(i).getNome();
+			dados = dados + "\t" + produtos.get(i).getPreco();
+			dados = dados + "\t" + produtos.get(i).getEstoque() + "\n";
 		}
 		return dados;
 	}

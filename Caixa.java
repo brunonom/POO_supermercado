@@ -11,6 +11,7 @@ public class Caixa{
 	public Caixa(){
 		setNumero();
 		possuiCliente = false;
+		clienteAtual = null;
 	}
 
 	public void setNumero(){
@@ -19,7 +20,7 @@ public class Caixa{
 	public int getNumero(){
 		return numero;
 	}
-	public Cliente getCliente(){
+	public Cliente getClienteAtual(){
 		return clienteAtual;
 	}
 	public void setPossuiAtendente(boolean possuiAtendente){
@@ -51,5 +52,6 @@ public class Caixa{
 	public void realizaCompra(){
 		clienteAtual.realizaCompra();
 		possuiCliente = false;
+		clienteAtual = null;
 	}
 }

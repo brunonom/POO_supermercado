@@ -28,10 +28,15 @@ public class Produto{
 
 	public String getInfo(){
 		String dados = "";
-		dados = dados + "Nome: " + nome + "\n";
-		dados = dados + "Preco: " + preco + "\n";
-		dados = dados + "Quantidade em estoque: " + estoque + "\n";
+		dados = dados + "nome: " + nome + "\n";
+		dados = dados + "preco: " + preco + "\n";
+		dados = dados + "quantidade em estoque: " + estoque + "\n";
 		return dados;
 	}
 
+	public void alteraInfo(String nome, double preco, int estoque){
+		this.nome = nome;
+		this.preco = preco;
+		this.estoque = estoque;
+	}
 }

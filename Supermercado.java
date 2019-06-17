@@ -4,15 +4,11 @@ public class Supermercado{
 	private ArrayList<Setor> setores;
 	private ArrayList<Pessoa> pessoas;
 	private ArrayList<Caixa> caixas;
-	private boolean executando;
-	private int menu; //0=principal; 1=setores, 2=pessoas, 3=caixas, 4=caixa especifico
-
+	
 	public Supermercado(){
 		this.setores = new ArrayList<Setor>();
 		this.pessoas = new ArrayList<Pessoa>();
 		this.caixas = new ArrayList<Caixa>();
-		this.executando = true;
-		this.menu = 0;
 	}
 
 	public ArrayList<Setor> getSetores(){
@@ -23,18 +19,6 @@ public class Supermercado{
 	}
 	public ArrayList<Caixa> getCaixas(){
 		return caixas;
-	}
-	public boolean getExecutando(){
-		return executando;
-	}
-	public void setExecutando(boolean executando){
-		this.executando = executando;
-	}
-	public int getMenu(){
-		return menu;
-	}
-	public void setMenu(int menu){
-		this.menu=menu;
 	}
 
 	public void adicionarSetor(Setor setor){
@@ -60,6 +44,15 @@ public class Supermercado{
 		int contador = 0;
 		for(int i=0; i<setores.size(); i++){
 			contador += setores.get(i).getProdutos().size();
+		}
+		return contador;
+	}
+	public int contaCaixasSemAtendente(){
+		int contador = 0;
+		for(int i=0; i<caixas.size(); i++){
+			if(!caixas.get(i).getPossuiAtendente()){
+				contador++;
+			}
 		}
 		return contador;
 	}

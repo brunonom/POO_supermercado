@@ -19,6 +19,13 @@ public class Cliente extends Pessoa{
 		compras = new ArrayList<Item>();
 	}
 
+	public ArrayList<Item> getCompras(){
+		return compras;
+	}
+	public boolean getPossuiCadastro(){
+		return possuiCadastro;
+	}
+
 	public void adicionaItem(Item item){
 		compras.add(item);
 	}
@@ -54,6 +61,12 @@ public class Cliente extends Pessoa{
 		return dados;
 	}
 
+	public void alteraInfo(String nome, String rg, String cpf, int idade, String email){
+		super.alteraInfo(nome, rg, cpf, idade);
+		this.email = email;
+		this.possuiCadastro = true;
+	}
+
 	public String getDadosCompra(){
 		double somatorio = 0;
 		String dados = "";
@@ -61,7 +74,7 @@ public class Cliente extends Pessoa{
 		for(int i=0; i<compras.size(); i++){
 			dados = dados + "\t\t" + compras.get(i).getProduto().getNome();
 			dados = dados + "\t\t" + compras.get(i).getQuantidade();
-			dados = dados + "\t\t" + compras.get(i).getPreco() + "\n";
+			dados = dados + "\t\t\t" + compras.get(i).getPreco() + "\n";
 			somatorio += compras.get(i).getPreco();
 		}
 		dados = dados + "total: " + somatorio + "\n";
