@@ -25,6 +25,7 @@ heranca:
 
 polimorfismo:
 	AplicacaoSupermercado(281, 379, 443, 482, 519, 753, 774)
+	Supermercado(73)
 
 campos estaticos:
 	AplicacaoSupermercado(4..11)
@@ -48,4 +49,5 @@ interface:
 	Pessoa(1)
 	Produto(1)
 	Setor(1)
+	Supermercado(3)
 

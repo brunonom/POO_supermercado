@@ -1,11 +1,13 @@
 import java.util.ArrayList;
 
-public class Supermercado{
+public class Supermercado implements Informacoes{
+	private String nome;
 	private ArrayList<Setor> setores;
 	private ArrayList<Pessoa> pessoas;
 	private ArrayList<Caixa> caixas;
 	
-	public Supermercado(){
+	public Supermercado(String nome){
+		this.nome = nome;
 		this.setores = new ArrayList<Setor>();
 		this.pessoas = new ArrayList<Pessoa>();
 		this.caixas = new ArrayList<Caixa>();
@@ -55,5 +57,24 @@ public class Supermercado{
 			}
 		}
 		return contador;
+	}
+
+	public String getInfo(){
+		String dados = "";
+		dados = dados + "nome: " + nome + "\n";
+		dados = dados + "\n";
+		dados = dados + "setores:\n";
+		for(int i=0; i<setores.size(); i++){
+			dados = dados + setores.get(i).getInfo() + "\n";
+		}
+		dados = dados + "\n";
+		dados = dados + "pessoas:\n";
+		for(int i=0; i<pessoas.size(); i++){
+			dados = dados + pessoas.get(i).getInfo() + "\n";
+		}
+		dados = dados + "\n";
+		dados = dados + "possui " + caixas.size() + " caixas\n";
+		dados = dados + "\n";
+		return dados;
 	}
 }

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class AplicacaoSupermercado{
-	private static Supermercado mercado = new Supermercado();
+	private static Supermercado mercado;
 	private static Scanner scan = new Scanner(System.in);
 	private static Setor setorAcessado;
 	private static Pessoa pessoaAcessada;
@@ -13,6 +13,16 @@ public class AplicacaoSupermercado{
 	//5=pessoa especifica, 6=caixa especifico, 7=produto especifico
 
 	public static void main(String[] args){
+		System.out.printf("ola, indique o nome do supermercado\n");
+		
+		String nome = "";
+		while(nome.equals("")){
+			System.out.printf("nome: ");
+			nome = scan.nextLine();
+		}
+
+		mercado = new Supermercado(nome);
+
 		executando = true;
 		menu = 0;
 		int opcao = -1;
@@ -52,11 +62,12 @@ public class AplicacaoSupermercado{
 	//escolhas dos menus
 		public static int escolhaMenuPrincipal(){
 			int escolha = -1;
-			while(escolha<0 || escolha>3){
+			while(escolha<0 || escolha>4){
 				System.out.printf("[0] sair\n");
-				System.out.printf("[1] menu de setores\n");
-				System.out.printf("[2] menu de pessoas\n");
-				System.out.printf("[3] menu de caixas\n");
+				System.out.printf("[1] acessar setores\n");
+				System.out.printf("[2] acessar pessoas\n");
+				System.out.printf("[3] acessar caixas\n");
+				System.out.printf("[4] ver dados do supermercado\n");
 				System.out.printf("escolha: ");
 				escolha = scan.nextInt();
 				scan.nextLine();
@@ -201,6 +212,9 @@ public class AplicacaoSupermercado{
 						return;
 					case 3: //ir menu caixas
 						menu = 3;
+						return;
+					case 4:
+						System.out.printf("%s\n", mercado.getInfo());
 						return;
 				}
 			case 1: //menu setores
